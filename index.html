@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pomodoro Timer</title>
+    <meta name="description" content="Pomodoro timer helps You to keep focus!">
+    <meta name="keywords" content="pomodoro timer, timer, stay focus, keep focus">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="app" id="app">
+        <div class="button workBtn jsButton" id="workBtn">Work</div>
+        <div class="button breakBtn jsButton" id="breakBtn">Break</div>
+        <h1 data-id="work" class="timerTitle" id="timerTitle">Work</h1>
+        <div class="button increaseMinBtn jsButton" id="increaseMinBtn">+</div>
+        <div class="button increaseSecBtn jsButton" id="increaseSecBtn">+</div>
+        <div class="timer" id="timer">
+            <span id="timerMin">20</span>
+            <span>:</span>
+            <span id="timerSec">00</span>
+        </div>
+        <div class="button decreaseMinBtn jsButton" id="decreaseMinBtn">-</div>
+        <div class="button decreaseSecBtn jsButton" id="decreaseSecBtn">-</div>
+        <div class="button startBtn jsButton" id="startBtn">Start</div>
+        <div class="button resetBtn" id="resetBtn">Reset</div>
+        <div class="button defaultBtn" id="defaultBtn">Default</div>
+    </div>
+
+    <script type="text/javascript" src="dist/main.js"></script>
+
+</body>
+
+</html>

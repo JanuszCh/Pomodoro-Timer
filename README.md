@@ -13,6 +13,6 @@ This simple web app helps You to keep focus when You work or study!
 
 https://januszch.github.io/Pomodoro-Timer/
 
-### Instalation
+### Installation
 
 Use ``` npm install ``` command to install all dependencies.

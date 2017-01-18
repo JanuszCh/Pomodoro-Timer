@@ -2,32 +2,31 @@ document.addEventListener("DOMContentLoaded", function() {
     require('../css/reset.css');
     require('../css/style.css');
 
-    const app = document.getElementById('app');
-    const increaseMinBtn = app.querySelector('#increaseMinBtn');
-    const decreaseMinBtn = app.querySelector('#decreaseMinBtn');
-    const increaseSecBtn = app.querySelector('#increaseSecBtn');
-    const decreaseSecBtn = app.querySelector('#decreaseSecBtn');
-    const startBtn = app.querySelector('#startBtn');
-    const resetBtn = app.querySelector('#resetBtn');
-    const defaultBtn = app.querySelector('#defaultBtn');
-    const workBtn = app.querySelector('#workBtn');
-    const breakBtn = app.querySelector('#breakBtn');
-    const timer = app.querySelector('#timer');
-    const timerMin = app.querySelector('#timerMin');
-    const timerSec = app.querySelector('#timerSec');
-    const timerTitle = app.querySelector('#timerTitle');
-    const buttons = app.querySelectorAll('.jsButton');
-    const alarmSound = new Audio('sounds/alarm.mp3');
-    let userMinBreak = '05';
-    let userSecBreak = '00';
-    let userMinWork = '20';
-    let userSecWork = '00';
-    let counting = '';
+    const app = document.getElementById('app'),
+        increaseMinBtn = app.querySelector('#increaseMinBtn'),
+        decreaseMinBtn = app.querySelector('#decreaseMinBtn'),
+        increaseSecBtn = app.querySelector('#increaseSecBtn'),
+        decreaseSecBtn = app.querySelector('#decreaseSecBtn'),
+        startBtn = app.querySelector('#startBtn'),
+        resetBtn = app.querySelector('#resetBtn'),
+        defaultBtn = app.querySelector('#defaultBtn'),
+        workBtn = app.querySelector('#workBtn'),
+        breakBtn = app.querySelector('#breakBtn'),
+        timer = app.querySelector('#timer'),
+        timerMin = app.querySelector('#timerMin'),
+        timerSec = app.querySelector('#timerSec'),
+        timerTitle = app.querySelector('#timerTitle'),
+        buttons = app.querySelectorAll('.jsButton'),
+        alarmSound = new Audio('sounds/alarm.mp3');
+    let userMinBreak = '05',
+        userSecBreak = '00',
+        userMinWork = '20',
+        userSecWork = '00',
+        counting = '';
 
     function toSeconds() {
         let minutesToSeconds = parseInt(timerMin.innerText) * 60;
-        let secondsCount = minutesToSeconds + parseInt(timerSec.innerText);
-        return secondsCount;
+        return minutesToSeconds + parseInt(timerSec.innerText);
     }
 
     function toMinutes(sec) {
@@ -75,103 +74,118 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    function startTimer() {
-        if (toSeconds() > 0) {
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].classList.add("inactive");
+    function removeEvents() {
+        increaseMinBtn.removeEventListener('click', increaseMin);
+        decreaseMinBtn.removeEventListener('click', decreaseMin);
+        increaseSecBtn.removeEventListener('click', increaseSec);
+        decreaseSecBtn.removeEventListener('click', decreaseSec);
+        workBtn.removeEventListener('click', workMode);
+        breakBtn.removeEventListener('click', breakMode);
+        startBtn.removeEventListener('click', startTimer);
+    }
+
+    function countdownLayout() {
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].classList.add("inactive");
+        }
+        timer.classList.add("active");
+        timerTitle.classList.add("active");
+    }
+
+    function startCountdown() {
+        counting = setInterval(() => {
+            let secondsCount = toSeconds() - 1;
+            let time = toMinutes(secondsCount);
+            showTime(time[0], time[1]);
+            if (secondsCount === 0) {
+                clearInterval(counting);
+                alarmSound.play();
             }
-            timer.classList.add("active");
-            timerTitle.classList.add("active");
+        }, 1000);
+    }
 
-            increaseMinBtn.removeEventListener('click', increaseMin);
-            decreaseMinBtn.removeEventListener('click', decreaseMin);
-            increaseSecBtn.removeEventListener('click', increaseSec);
-            decreaseSecBtn.removeEventListener('click', decreaseSec);
-            workBtn.removeEventListener('click', workMode);
-            breakBtn.removeEventListener('click', breakMode);
-            startBtn.removeEventListener('click', startTimer);
+    function isWorkMode() {
+        return timerTitle.dataset.id === "work";
+    }
 
-            if (timerTitle.dataset.id === "work") {
-                userMinWork = timerMin.innerText;
-                userSecWork = timerSec.innerText;
-            } else {
-                userMinBreak = timerMin.innerText;
-                userSecBreak = timerSec.innerText;
-            }
-
-            counting = setInterval(() => {
-                let secondsCount = toSeconds() - 1;
-                let time = toMinutes(secondsCount);
-                showTime(time[0], time[1]);
-                if (secondsCount === 0) {
-                    clearInterval(counting);
-                    alarmSound.play();
-                }
-            }, 1000);
+    function saveUserSettings() {
+        if (isWorkMode()) {
+            userMinWork = timerMin.innerText;
+            userSecWork = timerSec.innerText;
+        } else {
+            userMinBreak = timerMin.innerText;
+            userSecBreak = timerSec.innerText;
         }
     }
 
-    resetBtn.addEventListener('click', () => {
+    function startTimer() {
+        if (toSeconds() > 0) {
+            countdownLayout();
+            removeEvents();
+            saveUserSettings();
+            startCountdown();
+        }
+    }
+
+    function settingsLayout() {
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove("inactive");
         }
-
         timer.classList.remove("active");
         timerTitle.classList.remove("active");
+    }
 
-        activateButtons();
+    function resetTimer() {
+        settingsLayout();
+        addEvents();
         clearInterval(counting);
         alarmSound.pause();
 
-        if (timerTitle.dataset.id === "work") {
+        if (isWorkMode()) {
             showTime(userMinWork, userSecWork);
         } else {
             showTime(userMinBreak, userSecBreak);
         }
-    });
+    }
 
-    defaultBtn.addEventListener('click', () => {
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].classList.remove("inactive");
-        }
-
-        timer.classList.remove("active");
-        timerTitle.classList.remove("active");
-
-        activateButtons();
+    function defaultTimer() {
+        settingsLayout();
+        addEvents();
         clearInterval(counting);
         alarmSound.pause();
 
-        if (timerTitle.dataset.id === "work") {
+        if (isWorkMode()) {
             showTime(20, 0);
         } else {
             showTime(5, 0);
         }
-    });
+    }
+
+    function workModeLayout() {
+        timerTitle.dataset.id = 'work';
+        timerTitle.innerText = 'Work';
+        timerMin.innerText = userMinWork;
+        timerSec.innerText = userSecWork;
+    }
+
+    function breakModeLayout() {
+        timerTitle.dataset.id = 'break';
+        timerTitle.innerText = 'Break';
+        timerMin.innerText = userMinBreak;
+        timerSec.innerText = userSecBreak;
+    }
 
     function workMode() {
-        if (timerTitle.dataset.id === "break") {
-            timerTitle.dataset.id = 'work';
-            timerTitle.innerText = "Work";
-            userMinBreak = timerMin.innerText;
-            userSecBreak = timerSec.innerText;
-            timerMin.innerText = userMinWork;
-            timerSec.innerText = userSecWork;
-        }
+        saveUserSettings();
+        workModeLayout();
     }
 
     function breakMode() {
-        if (timerTitle.dataset.id === "work") {
-            timerTitle.dataset.id = 'break';
-            timerTitle.innerText = "Break";
-            userMinWork = timerMin.innerText;
-            userSecWork = timerSec.innerText;
-            timerMin.innerText = userMinBreak;
-            timerSec.innerText = userSecBreak;
-        }
+        saveUserSettings();
+        breakModeLayout();
     }
 
-    function activateButtons() {
+    function addEvents() {
         increaseMinBtn.addEventListener('click', increaseMin);
         decreaseMinBtn.addEventListener('click', decreaseMin);
         increaseSecBtn.addEventListener('click', increaseSec);
@@ -180,5 +194,9 @@ document.addEventListener("DOMContentLoaded", function() {
         workBtn.addEventListener('click', workMode);
         breakBtn.addEventListener('click', breakMode);
     }
-    activateButtons();
+
+    addEvents();
+    resetBtn.addEventListener('click', resetTimer);
+    defaultBtn.addEventListener('click', defaultTimer);
+
 });

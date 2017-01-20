@@ -1,22 +1,20 @@
 document.addEventListener("DOMContentLoaded", function() {
-    require('../css/reset.css');
-    require('../css/style.css');
 
     const app = document.getElementById('app'),
-        increaseMinBtn = app.querySelector('#increaseMinBtn'),
-        decreaseMinBtn = app.querySelector('#decreaseMinBtn'),
-        increaseSecBtn = app.querySelector('#increaseSecBtn'),
-        decreaseSecBtn = app.querySelector('#decreaseSecBtn'),
-        startBtn = app.querySelector('#startBtn'),
-        resetBtn = app.querySelector('#resetBtn'),
-        defaultBtn = app.querySelector('#defaultBtn'),
-        workBtn = app.querySelector('#workBtn'),
-        breakBtn = app.querySelector('#breakBtn'),
+        increaseMinBtn = app.querySelector('#increase-min-btn'),
+        decreaseMinBtn = app.querySelector('#decrease-min-btn'),
+        increaseSecBtn = app.querySelector('#increase-sec-btn'),
+        decreaseSecBtn = app.querySelector('#decrease-sec-btn'),
+        startBtn = app.querySelector('#start-btn'),
+        resetBtn = app.querySelector('#reset-btn'),
+        defaultBtn = app.querySelector('#default-btn'),
+        workBtn = app.querySelector('#work-btn'),
+        breakBtn = app.querySelector('#break-btn'),
         timer = app.querySelector('#timer'),
-        timerMin = app.querySelector('#timerMin'),
-        timerSec = app.querySelector('#timerSec'),
-        timerTitle = app.querySelector('#timerTitle'),
-        buttons = app.querySelectorAll('.jsButton'),
+        timerMin = app.querySelector('#timer-min'),
+        timerSec = app.querySelector('#timer-sec'),
+        timerTitle = app.querySelector('#timer-title'),
+        buttons = app.querySelectorAll('.js-button'),
         alarmSound = new Audio('sounds/alarm.mp3');
     let userMinBreak = '05',
         userSecBreak = '00',
@@ -32,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function toMinutes(sec) {
         let seconds = sec % 60;
         let minutes = (sec - seconds) / 60;
-        return [minutes, seconds];
+        return {minutes: minutes, seconds:seconds};
     }
 
     function showTime(min, sec) {
@@ -47,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function increaseMin() {
         let secondsCount = toSeconds() + 60;
         let time = toMinutes(secondsCount);
-        showTime(time[0], time[1]);
+        showTime(time.minutes, time.seconds);
     }
 
     function decreaseMin() {
@@ -55,14 +53,14 @@ document.addEventListener("DOMContentLoaded", function() {
         if (secondsCount >= 60) {
             secondsCount -= 60;
             let time = toMinutes(secondsCount);
-            showTime(time[0], time[1]);
+            showTime(time.minutes, time.seconds);
         }
     }
 
     function increaseSec() {
         let secondsCount = toSeconds() + 5;
         let time = toMinutes(secondsCount);
-        showTime(time[0], time[1]);
+        showTime(time.minutes, time.seconds);
     }
 
     function decreaseSec() {
@@ -70,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (secondsCount > 0) {
             secondsCount -= 5;
             let time = toMinutes(secondsCount);
-            showTime(time[0], time[1]);
+            showTime(time.minutes, time.seconds);
         }
     }
 
@@ -96,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
         counting = setInterval(() => {
             let secondsCount = toSeconds() - 1;
             let time = toMinutes(secondsCount);
-            showTime(time[0], time[1]);
+            showTime(time.minutes, time.seconds);
             if (secondsCount === 0) {
                 clearInterval(counting);
                 alarmSound.play();

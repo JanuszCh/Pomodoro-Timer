@@ -40,18 +40,18 @@ body {
     font-weight: 800;
 }
 
-.increaseMinBtn, .decreaseMinBtn, .increaseSecBtn, .decreaseSecBtn {
+.button--increaseMin, .button--decreaseMin, .button--increaseSec, .button--decreaseSec {
     border: 1px solid transparent;
     margin: 10px 23px;
     width: 50px;
     font-size: 28px;
 }
 
-.increaseMinBtn:hover, .decreaseMinBtn:hover, .increaseSecBtn:hover, .decreaseSecBtn:hover {
+.button--increaseMin:hover, .button--decreaseMin:hover, .button--increaseSec:hover, .button--decreaseSec:hover {
     border-color: white;
 }
 
-.startBtn {
+.button--start {
     width: 200px;
     font-size: 22px;
     padding: 10px;
@@ -59,13 +59,13 @@ body {
     display: block;
 }
 
-.workBtn, .breakBtn, .resetBtn, .defaultBtn {
+.button--work, .button--break, .button--reset, .button--default {
     width: 90px;
     margin: 20px 10px;
     padding: 5px;
 }
 
-.startBtn:hover, .workBtn:hover, .breakBtn:hover, .resetBtn:hover, .defaultBtn:hover {
+.button--start:hover, .button--work:hover, .button--break:hover, .button--reset:hover, .button--default:hover {
     background-color: white;
     color: #9D2D30;
 }

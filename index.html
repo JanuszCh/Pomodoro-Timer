@@ -7,26 +7,28 @@
     <meta name="description" content="Pomodoro timer helps You to keep focus!">
     <meta name="keywords" content="pomodoro timer, timer, stay focus, keep focus">
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
 
     <div class="app" id="app">
-        <div class="button workBtn jsButton" id="workBtn">Work</div>
-        <div class="button breakBtn jsButton" id="breakBtn">Break</div>
-        <h1 data-id="work" class="timerTitle" id="timerTitle">Work</h1>
-        <div class="button increaseMinBtn jsButton" id="increaseMinBtn">+</div>
-        <div class="button increaseSecBtn jsButton" id="increaseSecBtn">+</div>
+        <div class="button button--work js-button" id="work-btn">Work</div>
+        <div class="button button--break js-button" id="break-btn">Break</div>
+        <h1 data-id="work" class="timerTitle" id="timer-title">Work</h1>
+        <div class="button button--increaseMin js-button" id="increase-min-btn">+</div>
+        <div class="button button--increaseSec js-button" id="increase-sec-btn">+</div>
         <div class="timer" id="timer">
-            <span id="timerMin">20</span>
+            <span id="timer-min">20</span>
             <span>:</span>
-            <span id="timerSec">00</span>
+            <span id="timer-sec">00</span>
         </div>
-        <div class="button decreaseMinBtn jsButton" id="decreaseMinBtn">-</div>
-        <div class="button decreaseSecBtn jsButton" id="decreaseSecBtn">-</div>
-        <div class="button startBtn jsButton" id="startBtn">Start</div>
-        <div class="button resetBtn" id="resetBtn">Reset</div>
-        <div class="button defaultBtn" id="defaultBtn">Default</div>
+        <div class="button button--decreaseMin js-button" id="decrease-min-btn">-</div>
+        <div class="button button--decreaseSec js-button" id="decrease-sec-btn">-</div>
+        <div class="button button--start js-button" id="start-btn">Start</div>
+        <div class="button button--reset" id="reset-btn">Reset</div>
+        <div class="button button--default" id="default-btn">Default</div>
     </div>
 
     <script type="text/javascript" src="dist/main.js"></script>

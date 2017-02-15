@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
         timerSec = app.querySelector('#timer-sec'),
         timerTitle = app.querySelector('#timer-title'),
         buttons = app.querySelectorAll('.js-button'),
-        alarmSound = new Audio('dist/sounds/alarm.mp3');
-        MINUTE_IN_SECONDS = 60;
+        alarmSound = new Audio('dist/sounds/alarm.mp3'),
+        MINUTE_IN_SECONDS = 60,
         numberSecondsToChange = 5;
     let userMinBreak = '05',
         userSecBreak = '00',

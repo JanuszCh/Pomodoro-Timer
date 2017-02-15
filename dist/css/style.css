@@ -1,3 +1,5 @@
+/*style reset*/
+
 html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
     margin: 0;
     padding: 0;
@@ -167,4 +169,92 @@ button, input[type=button] {
     content: " ";
     display: block;
     clear: both;
+}
+
+/*app style*/
+
+body {
+    background-color: #9D2D30;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.app {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 300px;
+    margin: 5% auto 0 auto;
+    border: 2px solid #C34D4B;
+    border-radius: 3px;
+    padding: 10px;
+    text-align: center;
+    cursor: default;
+}
+
+.timer {
+    font-size: 42px;
+    color: #C34D4B;
+}
+
+.timer span {
+    font-weight: 800;
+}
+
+.button {
+    border: 2px solid white;
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
+    color: white;
+}
+
+.timerTitle {
+    font-size: 32px;
+    color: #C34D4B;
+    font-weight: 800;
+}
+
+.button--increaseMin, .button--decreaseMin, .button--increaseSec, .button--decreaseSec {
+    border: 1px solid transparent;
+    margin: 10px 23px;
+    width: 50px;
+    font-size: 28px;
+}
+
+.button--increaseMin:hover, .button--decreaseMin:hover, .button--increaseSec:hover, .button--decreaseSec:hover {
+    border-color: white;
+}
+
+.button--start {
+    width: 200px;
+    font-size: 22px;
+    padding: 10px;
+    margin: 15px auto 0 auto;
+    display: block;
+}
+
+.button--work, .button--break, .button--reset, .button--default {
+    width: 90px;
+    margin: 20px 10px;
+    padding: 5px;
+}
+
+.button--start:hover, .button--work:hover, .button--break:hover, .button--reset:hover, .button--default:hover {
+    background-color: white;
+    color: #9D2D30;
+}
+
+.inactive {
+    border-color: #C34D4B;
+    color: #BE2D30;
+}
+.inactive:hover {
+    background-color: #9D2D30;
+    border-color: #C34D4B;
+    color: #BE2D30;
+}
+
+.active {
+    color: white;
 }

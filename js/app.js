@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
         timerSec = app.querySelector('#timer-sec'),
         timerTitle = app.querySelector('#timer-title'),
         buttons = app.querySelectorAll('.js-button'),
-        alarmSound = new Audio('sounds/alarm.mp3');
+        alarmSound = new Audio('dist/sounds/alarm.mp3');
     let userMinBreak = '05',
         userSecBreak = '00',
         userMinWork = '20',
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function toMinutes(sec) {
         let seconds = sec % 60;
         let minutes = (sec - seconds) / 60;
-        return {minutes: minutes, seconds:seconds};
+        return {minutes: minutes, seconds: seconds};
     }
 
     function showTime(min, sec) {

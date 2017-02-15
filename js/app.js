@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
         timerTitle = app.querySelector('#timer-title'),
         buttons = app.querySelectorAll('.js-button'),
         alarmSound = new Audio('dist/sounds/alarm.mp3');
+        MINUTE_IN_SECONDS = 60;
+        numberSecondsToChange = 5;
     let userMinBreak = '05',
         userSecBreak = '00',
         userMinWork = '20',
@@ -23,13 +25,13 @@ document.addEventListener("DOMContentLoaded", function() {
         counting = '';
 
     function toSeconds() {
-        let minutesToSeconds = parseInt(timerMin.innerText) * 60;
+        let minutesToSeconds = parseInt(timerMin.innerText) * MINUTE_IN_SECONDS;
         return minutesToSeconds + parseInt(timerSec.innerText);
     }
 
     function toMinutes(sec) {
-        let seconds = sec % 60;
-        let minutes = (sec - seconds) / 60;
+        let seconds = sec % MINUTE_IN_SECONDS;
+        let minutes = (sec - seconds) / MINUTE_IN_SECONDS;
         return {minutes: minutes, seconds: seconds};
     }
 
@@ -43,22 +45,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function increaseMin() {
-        let secondsCount = toSeconds() + 60;
+        let secondsCount = toSeconds() + MINUTE_IN_SECONDS;
         let time = toMinutes(secondsCount);
         showTime(time.minutes, time.seconds);
     }
 
     function decreaseMin() {
         let secondsCount = toSeconds();
-        if (secondsCount >= 60) {
-            secondsCount -= 60;
+        if (secondsCount >= MINUTE_IN_SECONDS) {
+            secondsCount -= MINUTE_IN_SECONDS;
             let time = toMinutes(secondsCount);
             showTime(time.minutes, time.seconds);
         }
     }
 
     function increaseSec() {
-        let secondsCount = toSeconds() + 5;
+        let secondsCount = toSeconds() + numberSecondsToChange;
         let time = toMinutes(secondsCount);
         showTime(time.minutes, time.seconds);
     }
@@ -66,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function decreaseSec() {
         let secondsCount = toSeconds();
         if (secondsCount > 0) {
-            secondsCount -= 5;
+            secondsCount -= numberSecondsToChange;
             let time = toMinutes(secondsCount);
             showTime(time.minutes, time.seconds);
         }
